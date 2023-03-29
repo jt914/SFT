@@ -15,6 +15,18 @@ async function fetchInvasivePlants() {
 function checkInvasiveSpecies(plantName) {
     return invasivePlants[plantName] || null;
 }
+function imageToBase64(img) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            preview.src = reader.result;
+            resolve(reader.result.split(',')[1]);
+        };
+        reader.readAsDataURL(img);
+    });
+}
+
+
 
 function createInvasiveMessage(plantName, invasiveStatus) {
     let invasiveMessage = '';
